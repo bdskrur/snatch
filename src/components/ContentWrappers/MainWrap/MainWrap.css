@@ -1,0 +1,11 @@
+.wrap {
+    padding-top: 20px;
+}
+
+.content {
+    display: flex;
+    max-width: 1640px;
+    min-width: 1080px;
+    margin: auto;
+    padding: 0 20px;
+}

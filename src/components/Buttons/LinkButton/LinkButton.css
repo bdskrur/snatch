@@ -1,0 +1,11 @@
+.wrap button {
+    font-size: 14px;
+    color: #00A8FF;
+    letter-spacing: 0;
+    text-align: center;
+    height: 38px;
+}
+
+.wrap button:hover {
+    color: #00A8FF;
+}

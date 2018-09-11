@@ -1,0 +1,9 @@
+.wrap {
+    display: flex;
+    align-items: center;
+}
+
+.status {
+    font-size: 14px;
+    margin-left: 10px;
+}

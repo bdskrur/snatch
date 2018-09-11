@@ -1,0 +1,15 @@
+.token {
+    display: inline-block;
+    background-color: #464646;
+    border-radius: 3px;
+    padding: 1px 6px;
+    cursor: pointer;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-top: 3px;
+    margin-right: 3px;
+}
+
+.token.selected {
+    background-color: #888;
+}

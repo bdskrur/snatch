@@ -1,0 +1,54 @@
+.wrap {
+    position: relative;
+    overflow: hidden;
+    height: 80px;
+    width: 100%;
+    padding-bottom: 2px;
+    font-size: 14px;
+    cursor: pointer;
+
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrap:hover:not(.wrapProgress),
+.wrapHighlight:not(.wrapProgress) {
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.01);
+}
+.wrapProgress {
+    border: 2px solid #0488E0;
+    cursor: default;
+}
+
+.wrap input[type=file] {
+    position: absolute;
+    top: 0;
+    opacity: 0
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.filename {
+    font-weight: bold;
+}
+
+.progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+
+    background: #0488E0;
+
+    transition: .3s;
+}

@@ -1,0 +1,16 @@
+.container {
+    background: #262626;
+    padding-left: 10px;
+}
+
+.containerTitle {
+    padding: 20px 0;
+}
+
+.containerTitleText {
+    font-size: 22px;
+}
+
+.containerBody {
+    padding-bottom: 40px;
+}

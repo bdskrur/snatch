@@ -1,0 +1,7 @@
+.tabButton {
+    cursor: pointer;
+    padding-bottom: 3px;
+}
+.tabButtonActive {
+    border-bottom: 2px solid #0488E0;
+}

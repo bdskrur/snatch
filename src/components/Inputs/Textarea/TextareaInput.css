@@ -1,0 +1,12 @@
+.wrap textarea {
+    background: none;
+    color: inherit;
+    border: 1px solid #4D4D4D;
+}
+
+.wrap textarea::-webkit-input-placeholder,
+.wrap textarea:-moz-placeholder,
+.wrap textarea::-moz-placeholder,
+.wrap textarea:-ms-input-placeholder {
+    color: #fff;
+}

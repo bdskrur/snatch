@@ -1,0 +1,13 @@
+.inputTitle {
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.titleContainer {
+    position: relative;
+}
+
+.inputContainer {
+    margin-bottom: 20px;
+    position: relative;
+}

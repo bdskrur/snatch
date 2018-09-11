@@ -1,0 +1,32 @@
+.wrapper {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #4D4D4D;
+    cursor: text;
+    padding-left: 3px;
+    padding-bottom: 3px;
+}
+
+.wrapperFocused {
+    border-color: #1d85d0;
+    box-shadow: 0 0 0 1px #1d85d0;
+}
+
+.input {
+    background-color: unset;
+    color: white;
+    border: 0;
+    line-height: 20px;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.inputWrapper {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 3px;
+}

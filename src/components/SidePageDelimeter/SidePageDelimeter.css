@@ -1,0 +1,9 @@
+.wrap {
+    background: #F1F1F1;
+    opacity: 0.14;
+    height: 1px;
+    width: 100%;
+
+    margin-top: 25px;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,27 @@
+@import 'Table';
+
+:local {
+    .tableHeaders {
+        border-bottom: 1px solid hsla(0,0%,94.5%,.1);
+    }
+
+    .row {
+        height: 50px;
+        line-height: 20px;
+        align-items: center;
+    }
+    .row:after {
+        position: static;
+        background: unset;
+    }
+
+    .cellGroup {
+        align-items: center;
+    }
+
+    .cell {
+        display: flex;
+        align-items: center;
+        overflow: visible;
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "tslint-config-prettier",
+    "tslint-plugin-prettier",
+    "tslint:recommended",
+    "tslint-react"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "node_modules/**/*.ts"
+    ]
+  },
+  "rules": {
+    "prettier": true,
+    "ordered-imports": [
+      false
+    ],
+    "no-console": [
+      false,
+      "log",
+      "error"
+    ],
+    "no-debugger": false,
+    "object-literal-sort-keys": false,
+    "member-ordering": false,
+    "arrow-parens": false,
+    "trailing-comma": false,
+    "semicolon": false,
+    "jsx-no-multiline-js" : false,
+    "jsx-alignment" : false
+  }
+}
