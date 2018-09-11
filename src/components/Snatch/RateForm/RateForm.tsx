@@ -14,9 +14,9 @@ export class RateForm extends React.Component {
                 <WrapperForInput title="Прогноз" hint="Предполагаемая сумма банка">
                     <BetAmount />
                 </WrapperForInput>
-                <WrapperForInput>
-                    <BaseButton use="success">Сделать прогноз</BaseButton>
-                </WrapperForInput>
+                <div style={{ marginTop: -14 }}>
+                    <BaseButton use="success">Отправить</BaseButton>
+                </div>
             </div>
         );
     }
