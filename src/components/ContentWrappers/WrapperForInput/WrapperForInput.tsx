@@ -1,17 +1,17 @@
 import * as React from "react";
-import cn from "./TitleForInput.css";
+import cn from "./WrapperForInput.css";
 import Gapped from "retail-ui/components/Gapped/Gapped";
 import Icon from "retail-ui/components/Icon/Icon";
 import Tooltip from "retail-ui/components/Tooltip/Tooltip";
 import { CSSProperties } from "react";
 
 export interface IProps {
-    title: string;
+    title?: string;
     hint?: string;
     style?: CSSProperties;
 }
 
-export class TitleForInput extends React.Component<IProps> {
+export class WrapperForInput extends React.Component<IProps> {
     public render() {
         const { title, hint, style, children } = this.props;
         return (

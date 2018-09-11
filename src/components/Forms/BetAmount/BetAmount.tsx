@@ -1,7 +1,7 @@
 import * as React from "react";
-import { BaseButton } from "../../Buttons/BaseButton/BaseButton";
 import { BaseInput } from "../../Inputs/BaseInput/BaseInput";
 import cn from "./BetAmount.css";
+import { BetAmountButton } from "./BetAmountButton";
 
 export class BetAmount extends React.Component {
     public render() {
@@ -12,10 +12,10 @@ export class BetAmount extends React.Component {
                 </div>
                 <div className={cn("buttonsContainer")}>
                     <div className={cn("button")}>
-                        <BaseButton>-</BaseButton>
+                        <BetAmountButton>-</BetAmountButton>
                     </div>
                     <div className={cn("button")}>
-                        <BaseButton>+</BaseButton>
+                        <BetAmountButton>+</BetAmountButton>
                     </div>
                 </div>
             </div>
