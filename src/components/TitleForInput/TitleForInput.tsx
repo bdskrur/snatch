@@ -20,9 +20,9 @@ export class TitleForInput extends React.Component<IProps> {
                     <span className={cn("inputTitle")}>
                         {title}{" "}
                         {hint && (
-                            <Tooltip render={this.renderTooltip()} closeButton={true}>
+                            <Tooltip render={this.renderTooltip()}>
                                 {" "}
-                                <Icon color={"#787878"} name={"HelpDot"} />{" "}
+                                <Icon color={"rgb(69, 87, 109)"} name={"HelpDot"} />{" "}
                             </Tooltip>
                         )}
                     </span>
@@ -35,6 +35,6 @@ export class TitleForInput extends React.Component<IProps> {
     }
 
     private renderTooltip = () => {
-        return () => <div style={{ maxWidth: 250 }}>{this.props.hint}</div>;
+        return () => <div style={{ maxWidth: 250, color: "black" }}>{this.props.hint}</div>;
     };
 }
