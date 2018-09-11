@@ -1,0 +1,23 @@
+.wrap {
+
+}
+
+.inputContainer {
+
+}
+
+.buttonsContainer {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    flex: 1;
+}
+.button:first-child {
+    padding-right: 3px;
+}
+.button:last-child {
+    padding-left: 3px;
+}

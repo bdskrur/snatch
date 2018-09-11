@@ -1,0 +1,12 @@
+.wrap {
+    width: 100%;
+    display: flex;
+}
+
+.bar {
+    width: 250px;
+}
+
+.body {
+    flex: 1;
+}
