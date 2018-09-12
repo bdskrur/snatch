@@ -2,3 +2,14 @@
     display: block;
     margin-left: auto;
 }
+
+.svgChartContainer {
+    display: inline-block;
+    float: right;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 5px;
+}
+.svgChartContainerBody {
+
+}

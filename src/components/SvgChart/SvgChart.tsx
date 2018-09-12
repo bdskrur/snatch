@@ -3,9 +3,9 @@ import cn from "./SvgChart.css";
 import { CHART_POINTS_AMOUNT } from "../../constants";
 
 export enum Strokes {
-    Common = "#00A8FF",
-    Warning = "#B5A800",
-    Dangerous = "#D80000",
+    Common = "#2aa76d",
+    Warning = "#2aa76d",
+    Dangerous = "#2aa76d",
 }
 
 interface IProps {
@@ -33,10 +33,7 @@ export class SvgChart extends React.Component<IProps> {
         const maxBorder = limit || this.getMaxBorder(data);
         const limitData = data.map(item => (item > maxBorder ? maxBorder : item));
         this.drawGraphic(limitData, maxBorder);
-        const svgPoints = this.points.reduce(
-            (previousValue, currentValue) => previousValue + `${currentValue.x},${currentValue.y} `,
-            ""
-        );
+        const svgPoints = this.points.map(currentValue => `${currentValue.x},${currentValue.y}`).join(" ");
         return (
             <div>
                 <svg
@@ -48,11 +45,6 @@ export class SvgChart extends React.Component<IProps> {
                     <defs>
                         <filter id="f1" x="0" y="0" width="200%" height="200%">
                             <feOffset result="shape1" in="SourceGraphic" dx="0" dy="4" />
-                            <feGaussianBlur result="shadow1" in="shape1" stdDeviation="3" />
-                            <feMerge>
-                                <feMergeNode in="shadow1" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
                         </filter>
                     </defs>
 
@@ -85,13 +77,13 @@ export class SvgChart extends React.Component<IProps> {
         const pointsCount = pointsAmount || CHART_POINTS_AMOUNT;
         const step = width / pointsCount;
 
-        let x = width;
+        let x = 0;
         const points = [];
 
-        for (let i = data.length - 1; i > 0; i--) {
-            const y = height - data[i] * factor;
+        for (const item of data) {
+            const y = height - item * factor;
             const point: IPoint = { x: Math.round(x), y: Math.round(y) };
-            x -= step;
+            x += step;
             points.push(point);
         }
 
