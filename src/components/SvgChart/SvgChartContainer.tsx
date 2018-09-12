@@ -26,7 +26,7 @@ export class SvgChartContainer extends React.Component {
         }
         const count = this.wrap.clientWidth / STEP_HELP_LINE;
         const elements = [];
-        for (let i = 1; i < count + 1; i++) {
+        for (let i = 1; i < count; i++) {
             elements.push(this.renderHelpLine("helpLineY", { left: STEP_HELP_LINE * i + 20 }, i));
         }
         return elements;
@@ -39,7 +39,7 @@ export class SvgChartContainer extends React.Component {
         }
         const count = this.wrap.clientHeight / STEP_HELP_LINE;
         const elements = [];
-        for (let i = 1; i < count + 1; i++) {
+        for (let i = 1; i < count; i++) {
             elements.push(this.renderHelpLine("helpLineX", { bottom: STEP_HELP_LINE * i + 20 }, i));
         }
         return elements;
