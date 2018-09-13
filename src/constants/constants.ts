@@ -16,7 +16,7 @@ export const PACKAGES_PER_PAGE = 30;
 
 export const UPDATE_CACHE_PERIOD_MS = 2000;
 
-export const CHART_POINTS_AMOUNT = 30;
+// export const CHART_POINTS_AMOUNT = 30;
 
 export const DEFAULT_ROW_HEIGHT = 40;
 

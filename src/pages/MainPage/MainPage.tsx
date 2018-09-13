@@ -28,10 +28,24 @@ export class MainPage extends React.Component<IProps> {
                 <PageWithWorkspace.Body>
                     <WrapperForInput title={"Информация об игроках"} hint={"Информация"}>
                         <SvgChartContainer>
-                            <SvgChart width={500} height={300} data={this.snatchGeneratorStore.peopleCount} />
+                            <SvgChart
+                                width={500}
+                                height={300}
+                                models={[
+                                    {
+                                        data: this.snatchGeneratorStore.peopleGraph,
+                                        stroke: "#2e3e52",
+                                        polygonFill: "#2e3e52",
+                                    },
+                                    {
+                                        data: this.snatchGeneratorStore.playerGraph,
+                                        stroke: "#02a6f2",
+                                    },
+                                ]}
+                            />
                         </SvgChartContainer>
                     </WrapperForInput>
-                    {this.snatchGeneratorStore.peopleCount}
+                    {this.snatchGeneratorStore.peopleGraph}
                 </PageWithWorkspace.Body>
                 <PageWithWorkspace.Bar>
                     <RateForm />
