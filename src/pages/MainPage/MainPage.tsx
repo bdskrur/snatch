@@ -34,8 +34,8 @@ export class MainPage extends React.Component<IProps> {
                                 models={[
                                     {
                                         data: this.snatchGeneratorStore.peopleGraph,
-                                        stroke: "#2e3e52",
-                                        polygonFill: "#2e3e52",
+                                        stroke: "rgba(46, 62, 82, 0.3)",
+                                        polygonFill: "rgba(46, 62, 82, 0.3)",
                                     },
                                     {
                                         data: this.snatchGeneratorStore.playerGraph,

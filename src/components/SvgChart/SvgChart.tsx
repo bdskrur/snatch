@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "./SvgChart.css";
 
-const CHART_POINTS_AMOUNT = 30;
+const CHART_POINTS_AMOUNT = 29;
 
 // export enum Strokes {
 //     Common = "#2aa76d",

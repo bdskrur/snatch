@@ -11,8 +11,16 @@ export class SnatchGeneratorStore {
     @observable
     public playerCount: number;
 
+    private iteration: number = 0;
+    private iterationMax: number = 30;
+
     @action
     private addPeople = () => {
+        if (this.iteration === this.iterationMax) {
+            this.addPeopleAction.stop();
+            return;
+        }
+        this.iteration++;
         if (!this.peopleCount && this.peopleCount !== 0) {
             this.peopleCount = 0;
             this.peopleGraph.push(this.peopleCount);
