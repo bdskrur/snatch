@@ -32,14 +32,6 @@ export class SnatchGeneratorStore {
             return;
         }
         this.iteration++;
-        if (!this.peopleCount && this.peopleCount !== 0) {
-            this.peopleCount = 0;
-            this.peopleGraph.push(this.peopleCount);
-        } else {
-            const value = randomInteger(5, 10);
-            this.peopleGraph.push(value + this.peopleCount);
-            this.peopleCount += value;
-        }
 
         if (!this.playerCount && this.playerCount !== 0) {
             this.playerCount = 0;
@@ -51,6 +43,15 @@ export class SnatchGeneratorStore {
             for (let i = 0; i < value; i++) {
                 this.bank += randomInteger(30, 1000);
             }
+        }
+
+        if (!this.peopleCount && this.peopleCount !== 0) {
+            this.peopleCount = 0;
+            this.peopleGraph.push(this.peopleCount);
+        } else {
+            const value = randomInteger(this.playerCount, 3000);
+            this.peopleGraph.push(value + this.peopleCount);
+            this.peopleCount = value;
         }
     };
 
