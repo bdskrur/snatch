@@ -1,5 +1,9 @@
 import { action, observable } from "mobx";
 import { PeriodicalAction } from "../utils/periodicalAction";
+import { randomInteger } from "../utils/math";
+
+const BET_CHANGE_VALUE = 30;
+const BANK_CHANGE_VALUE = 100;
 
 export class SnatchGeneratorStore {
     @observable
@@ -10,9 +14,16 @@ export class SnatchGeneratorStore {
     public playerGraph: number[] = [];
     @observable
     public playerCount: number;
+    @observable
+    public bank: number;
+
+    @observable
+    public myBet: number = 30;
+    @observable
+    public myPrediction: number = 0;
 
     private iteration: number = 0;
-    private iterationMax: number = 30;
+    private iterationMax: number = 600;
 
     @action
     private addPeople = () => {
@@ -25,7 +36,7 @@ export class SnatchGeneratorStore {
             this.peopleCount = 0;
             this.peopleGraph.push(this.peopleCount);
         } else {
-            const value = Math.random() * 20;
+            const value = randomInteger(5, 10);
             this.peopleGraph.push(value + this.peopleCount);
             this.peopleCount += value;
         }
@@ -34,11 +45,48 @@ export class SnatchGeneratorStore {
             this.playerCount = 0;
             this.playerGraph.push(this.playerCount);
         } else {
-            const value = Math.random() * 10;
+            const value = randomInteger(1, 5);
             this.playerGraph.push(value + this.playerCount);
             this.playerCount += value;
+            for (let i = 0; i < value; i++) {
+                this.bank += randomInteger(30, 1000);
+            }
         }
     };
 
-    public addPeopleAction: PeriodicalAction = new PeriodicalAction(this.addPeople, 1000);
+    @action
+    public onChangeMyBet = (e: any) => {
+        this.myBet = e.target.value;
+    };
+
+    @action
+    public incrementMyBet = () => {
+        this.myBet += BET_CHANGE_VALUE;
+    };
+
+    @action
+    public decrementMyBet = () => {
+        this.myBet -= BET_CHANGE_VALUE;
+    };
+
+    @action
+    public onChangeMyPrediction = (e: any) => {
+        this.myPrediction = e.target.value;
+    };
+
+    @action
+    public incrementMyPrediction = () => {
+        this.myPrediction += BANK_CHANGE_VALUE;
+    };
+
+    @action
+    public decrementMyPrediction = () => {
+        this.myPrediction -= BANK_CHANGE_VALUE;
+    };
+
+    public sendBet = () => {
+        // sd
+    };
+
+    public addPeopleAction: PeriodicalAction = new PeriodicalAction(this.addPeople, 100);
 }

@@ -6,7 +6,6 @@
 .svgChartContainer {
     display: inline-block;
     float: right;
-    background: rgb(25, 39, 53);
     padding: 20px;
     border-radius: 5px;
     position: relative;
@@ -27,14 +26,14 @@
     background: #2e3e52;
 }
 .axisY {
-    width: 2px;
+    width: 1px;
 
-    left: 18px;
+    left: 19px;
 }
 .axisX {
-    height: 2px;
+    height: 1px;
 
-    bottom: 18px;
+    bottom: 19px;
 }
 .helpLineY,
 .helpLineX {

@@ -1,13 +1,7 @@
 import * as React from "react";
 import cn from "./SvgChart.css";
 
-const CHART_POINTS_AMOUNT = 29;
-
-// export enum Strokes {
-//     Common = "#2aa76d",
-//     Warning = "#2aa76d",
-//     Dangerous = "#2aa76d",
-// }
+const CHART_POINTS_AMOUNT = 599;
 
 interface IGraphModel {
     data: number[];
@@ -44,10 +38,6 @@ interface IPoint {
 export class SvgChart extends React.Component<IProps> {
     private svgElement: SVGSVGElement | null;
 
-    // private points: IPoint[];
-
-    // private stroke: string;
-
     public render() {
         const { height, width, limit, models } = this.props;
         const maxBorder = limit || this.getMaxBorder(models);
@@ -62,8 +52,7 @@ export class SvgChart extends React.Component<IProps> {
                 polygonFill: graph.polygonFill,
             });
         }
-        // const polylinePoints = this.points.map(currentValue => `${currentValue.x},${currentValue.y}`).join(" ");
-        // const poligonPoints = polylinePoints + ` ${this.points[this.points.length - 1].x},${height} 0,${height}`;
+
         return (
             <div>
                 <svg
@@ -109,7 +98,6 @@ export class SvgChart extends React.Component<IProps> {
             });
         }
         return graphs;
-        // this.stroke = this.getStroke(data[data.length - 1], maxBorder);
     }
 
     private getPoints(
@@ -144,18 +132,5 @@ export class SvgChart extends React.Component<IProps> {
                 }, 0)
             )
             .sort((a, b) => (a < b ? 1 : -1))[0];
-        // return data.reduce((previousValue, currentValue) => {
-        //     return previousValue < currentValue ? currentValue : previousValue;
-        // }, 0);
     }
-
-    // private getStroke(value: number, maxBorder: number): string {
-    //     if (value > maxBorder * 0.9) {
-    //         return Strokes.Dangerous;
-    //     } else if (value > maxBorder * 0.8) {
-    //         return Strokes.Warning;
-    //     } else {
-    //         return Strokes.Common;
-    //     }
-    // }
 }

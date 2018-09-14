@@ -1,8 +1,14 @@
 import * as React from "react";
 import cn from "./BaseInput.css";
 
-export class BaseInput extends React.Component {
+interface IProps {
+    value: string | number;
+    onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+}
+
+export class BaseInput extends React.Component<IProps> {
     public render() {
-        return <input className={cn("input")} />;
+        const { onChange, value } = this.props;
+        return <input className={cn("input")} onChange={onChange} value={value} />;
     }
 }
