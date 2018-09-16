@@ -5,6 +5,8 @@ import { WrapperForInput } from "../../ContentWrappers/WrapperForInput/WrapperFo
 import { BaseButton } from "../../Buttons/BaseButton/BaseButton";
 import { inject, observer } from "mobx-react";
 import { RootStore } from "../../../stores";
+import { NumberTitle } from "../../NumberTitle/NumberTitle";
+import Gapped from "retail-ui/components/Gapped/Gapped";
 
 interface IProps {
     rootStore?: RootStore;
@@ -16,27 +18,35 @@ export class RateForm extends React.Component<IProps> {
     public render() {
         return (
             <div className={cn("wrap")}>
-                <WrapperForInput title="Ставка" hint="Минимальная ставка 30">
-                    <BetAmount
-                        value={this.model.myBet}
-                        onChange={this.model.onChangeMyBet}
-                        increment={this.model.incrementMyBet}
-                        decrement={this.model.decrementMyBet}
+                <Gapped gap={15} vertical={true}>
+                    <NumberTitle value={this.model.peopleCount} title="Игроков онлайн" />
+                    <NumberTitle
+                        value={this.model.playerCount}
+                        title="Игроков сделали ставку"
+                        style={{ background: "rgba(2, 166, 242, 0.5)" }}
                     />
-                </WrapperForInput>
-                <WrapperForInput title="Прогноз" hint="Предполагаемая сумма банка">
-                    <BetAmount
-                        value={this.model.myPrediction}
-                        onChange={this.model.onChangeMyPrediction}
-                        increment={this.model.incrementMyPrediction}
-                        decrement={this.model.decrementMyPrediction}
-                    />
-                </WrapperForInput>
-                <div style={{ marginTop: -14 }}>
-                    <BaseButton use="success" onClick={this.model.sendBet}>
-                        Отправить
-                    </BaseButton>
-                </div>
+                    <WrapperForInput title="Ставка" hint="Минимальная ставка 30">
+                        <BetAmount
+                            value={this.model.myBet}
+                            onChange={this.model.onChangeMyBet}
+                            increment={this.model.incrementMyBet}
+                            decrement={this.model.decrementMyBet}
+                        />
+                    </WrapperForInput>
+                    <WrapperForInput title="Прогноз" hint="Предполагаемая сумма банка">
+                        <BetAmount
+                            value={this.model.myPrediction}
+                            onChange={this.model.onChangeMyPrediction}
+                            increment={this.model.incrementMyPrediction}
+                            decrement={this.model.decrementMyPrediction}
+                        />
+                    </WrapperForInput>
+                    <div>
+                        <BaseButton use="success" onClick={this.model.sendBet}>
+                            Отправить
+                        </BaseButton>
+                    </div>
+                </Gapped>
             </div>
         );
     }

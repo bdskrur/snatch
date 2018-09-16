@@ -49,8 +49,8 @@ export class SnatchGeneratorStore {
             this.peopleCount = 0;
             this.peopleGraph.push(this.peopleCount);
         } else {
-            const value = randomInteger(this.playerCount, 3000);
-            this.peopleGraph.push(value + this.peopleCount);
+            const value = randomInteger(this.playerCount, this.playerCount + 100);
+            this.peopleGraph.push(value);
             this.peopleCount = value;
         }
     };
@@ -89,5 +89,5 @@ export class SnatchGeneratorStore {
         // sd
     };
 
-    public addPeopleAction: PeriodicalAction = new PeriodicalAction(this.addPeople, 100);
+    public addPeopleAction: PeriodicalAction = new PeriodicalAction(this.addPeople, 1000);
 }
