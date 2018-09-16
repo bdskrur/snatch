@@ -22,8 +22,10 @@ export class SnatchGeneratorStore {
     @observable
     public myPrediction: number = 0;
 
-    private iteration: number = 0;
-    private iterationMax: number = 600;
+    @observable
+    public iteration: number = 0;
+    @observable
+    public iterationMax: number = 600;
 
     @action
     private addPeople = () => {

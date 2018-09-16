@@ -4,7 +4,7 @@ import { CSSProperties } from "react";
 
 interface IProps {
     value: number;
-    title: string;
+    title?: string;
     style?: CSSProperties;
 }
 
@@ -15,7 +15,7 @@ export class NumberTitle extends React.Component<IProps> {
         return (
             <div className={cn("wrap")} style={style}>
                 <div className={cn("value")}>{value}</div>
-                <div className={cn("title")}>{title}</div>
+                {title ? <div className={cn("title")}>{title}</div> : null}
             </div>
         );
     }

@@ -19,13 +19,17 @@ export class RateForm extends React.Component<IProps> {
         return (
             <div className={cn("wrap")}>
                 <Gapped gap={15} vertical={true}>
+                    <NumberTitle
+                        value={this.model.iterationMax - this.model.iteration}
+                        style={{ background: "#732a2a" }}
+                    />
                     <NumberTitle value={this.model.peopleCount} title="Игроков онлайн" />
                     <NumberTitle
                         value={this.model.playerCount}
-                        title="Игроков сделали ставку"
+                        title="Игроков сделали вклад"
                         style={{ background: "rgba(2, 166, 242, 0.5)" }}
                     />
-                    <WrapperForInput title="Ставка" hint="Минимальная ставка 30">
+                    <WrapperForInput title="Вклад" hint="Минимальный вклад 30">
                         <BetAmount
                             value={this.model.myBet}
                             onChange={this.model.onChangeMyBet}
