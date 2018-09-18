@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { action, computed, observable } from "mobx";
 import { PeriodicalAction } from "../utils/periodicalAction";
 import { randomInteger } from "../utils/math";
 
@@ -26,9 +26,26 @@ export class SnatchGeneratorStore {
     public iteration: number = 0;
     @observable
     public iterationMax: number = 600;
+    @observable
+    public iterationsInMinute: number = 60;
+
+    @computed
+    public get timeLeft(): string {
+        const min = Math.trunc((this.iterationMax - this.iteration - 1) / 60);
+        const sec =
+            String(this.iterationsInMinute).length === 1 ? `0${this.iterationsInMinute}` : this.iterationsInMinute;
+
+        return `${min}:${sec}`;
+    }
 
     @action
     private addPeople = () => {
+        if (this.iterationsInMinute === 0) {
+            this.iterationsInMinute = 59;
+        } else {
+            this.iterationsInMinute = this.iterationsInMinute - 1;
+        }
+
         if (this.iteration === this.iterationMax) {
             this.addPeopleAction.stop();
             return;
@@ -39,7 +56,7 @@ export class SnatchGeneratorStore {
             this.playerCount = 0;
             this.playerGraph.push(this.playerCount);
         } else {
-            const value = randomInteger(1, 5);
+            const value = randomInteger(0, 2);
             this.playerGraph.push(value + this.playerCount);
             this.playerCount += value;
             for (let i = 0; i < value; i++) {
@@ -51,7 +68,7 @@ export class SnatchGeneratorStore {
             this.peopleCount = 0;
             this.peopleGraph.push(this.peopleCount);
         } else {
-            const value = randomInteger(this.playerCount, this.playerCount + 100);
+            const value = randomInteger(this.playerCount, this.playerCount + randomInteger(0, 5));
             this.peopleGraph.push(value);
             this.peopleCount = value;
         }

@@ -3,7 +3,7 @@ import cn from "./NumberTitle.css";
 import { CSSProperties } from "react";
 
 interface IProps {
-    value: number;
+    value: number | string;
     title?: string;
     style?: CSSProperties;
 }
