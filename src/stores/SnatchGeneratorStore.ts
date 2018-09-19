@@ -2,7 +2,7 @@ import { action, computed, observable } from "mobx";
 import { PeriodicalAction } from "../utils/periodicalAction";
 import { randomInteger } from "../utils/math";
 import * as uuid from "uuid";
-import { getRandomColor } from "../utils/color";
+// import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
 const BANK_CHANGE_VALUE = 100;
@@ -39,18 +39,8 @@ export class SnatchGeneratorStore {
     @observable
     public iterationsInMinute: number = 60;
 
-    @computed
-    public get playersPie() {
-        const players = [
-            { key: "A", value: randomInteger(30, 100), color: "#aaac84" },
-            { key: "B", value: randomInteger(30, 1000), color: "#dce7c5" },
-            { key: "C", value: randomInteger(30, 40), color: "#e3a51a" },
-        ];
-
-        this.players.forEach(player => (player.color = getRandomColor()));
-
-        return players;
-    }
+    @observable
+    public playersPie: number[] = [];
 
     @computed
     public get timeLeft(): string {
@@ -91,6 +81,8 @@ export class SnatchGeneratorStore {
                     value: sumBet,
                     color: "",
                 });
+
+                this.playersPie = [...this.playersPie, sumBet];
             }
         }
 

@@ -4,7 +4,7 @@ import { SvgPieChartPie } from "./SvgPieChartPie";
 const colors = ["#43A19E", "#7B43A1", "#F2317A", "#FF9824", "#58CF6C"];
 
 interface IProps {
-    data?: any;
+    data: any;
 }
 
 interface IState {
@@ -15,56 +15,64 @@ export class SvgPieChart extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            data: [5, 12, 8, 3, 10],
+            data: this.props.data,
         };
     }
 
-    public componentDidMount() {
-        setInterval(() => {
-            let dataSize = getRandomInt(2, 6);
-            const data = [];
-
-            for (; dataSize--; ) {
-                data.push(getRandomInt(1, 20));
-            }
-
-            this.setState({ data });
-        }, 2000);
+    public componentDidUpdate(prevProps: IProps) {
+        if (this.props.data !== prevProps.data) {
+            this.setState({
+                data: this.props.data.slice(0),
+            });
+        }
     }
+
+    // public componentDidMount() {
+    //     setInterval(() => {
+    //         let dataSize = getRandomInt(2, 6);
+    //         const data = [];
+    //
+    //         for (; dataSize--; ) {
+    //             data.push(getRandomInt(1, 20));
+    //         }
+    //
+    //         this.setState({ data });
+    //     }, 2000);
+    // }
 
     public render() {
         return (
             <div>
-                <SvgPieChartPie
-                    data={this.state.data}
-                    radius={150}
-                    hole={50}
-                    colors={colors}
-                    labels={true}
-                    percent={true}
-                    strokeWidth={3}
-                    stroke={"#fff"}
-                />
+                {/*<SvgPieChartPie*/}
+                {/*data={this.state.data}*/}
+                {/*radius={150}*/}
+                {/*hole={50}*/}
+                {/*colors={colors}*/}
+                {/*labels={true}*/}
+                {/*percent={true}*/}
+                {/*strokeWidth={3}*/}
+                {/*stroke={"#fff"}*/}
+                {/*/>*/}
 
-                <SvgPieChartPie
-                    data={this.state.data}
-                    radius={80}
-                    hole={5}
-                    colors={colors}
-                    strokeWidth={3}
-                    labels={true}
-                />
+                {/*<SvgPieChartPie*/}
+                {/*data={this.state.data}*/}
+                {/*radius={80}*/}
+                {/*hole={5}*/}
+                {/*colors={colors}*/}
+                {/*strokeWidth={3}*/}
+                {/*labels={true}*/}
+                {/*/>*/}
 
                 <SvgPieChartPie data={this.state.data} radius={80} hole={65} colors={colors} strokeWidth={1} />
 
-                <SvgPieChartPie
-                    data={this.state.data}
-                    radius={150}
-                    hole={0}
-                    colors={colors}
-                    strokeWidth={1}
-                    stroke={"rgba(0, 0, 0, .5)"}
-                />
+                {/*<SvgPieChartPie*/}
+                {/*data={this.state.data}*/}
+                {/*radius={150}*/}
+                {/*hole={0}*/}
+                {/*colors={colors}*/}
+                {/*strokeWidth={1}*/}
+                {/*stroke={"rgba(0, 0, 0, .5)"}*/}
+                {/*/>*/}
             </div>
         );
     }
