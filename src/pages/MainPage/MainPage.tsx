@@ -1,10 +1,9 @@
 import * as React from "react";
 import { PageWithWorkspace } from "../../components/ContentWrappers/PageWithWorkspace/PageWithWorkspace";
 import { RateForm } from "../../components/Snatch/RateForm/RateForm";
-import { SvgChart } from "../../components/SvgChart/SvgChart";
 import { inject, observer } from "mobx-react";
 import { RootStore } from "../../stores";
-import { SvgChartContainer } from "../../components/SvgChart/SvgChartContainer";
+import { SvgPieChart } from "../../components/SvgPieChart/SvgPieChart";
 
 interface IProps {
     rootStore?: RootStore;
@@ -25,24 +24,7 @@ export class MainPage extends React.Component<IProps> {
         return (
             <PageWithWorkspace>
                 <PageWithWorkspace.Body>
-                    <SvgChartContainer>
-                        <SvgChart
-                            width={500}
-                            height={300}
-                            models={[
-                                {
-                                    data: this.snatchGeneratorStore.peopleGraph,
-                                    stroke: "rgba(46, 62, 82, 0.3)",
-                                    polygonFill: "rgba(46, 62, 82, 0.3)",
-                                },
-                                {
-                                    data: this.snatchGeneratorStore.playerGraph,
-                                    stroke: "#02a6f2",
-                                },
-                            ]}
-                        />
-                    </SvgChartContainer>
-                    {this.snatchGeneratorStore.peopleGraph}
+                    <SvgPieChart />
                 </PageWithWorkspace.Body>
                 <PageWithWorkspace.Bar>
                     <RateForm />

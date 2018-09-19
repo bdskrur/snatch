@@ -1,9 +1,17 @@
 import { action, computed, observable } from "mobx";
 import { PeriodicalAction } from "../utils/periodicalAction";
 import { randomInteger } from "../utils/math";
+import * as uuid from "uuid";
+import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
 const BANK_CHANGE_VALUE = 100;
+
+interface IPlayer {
+    key: string;
+    value: number;
+    color: string;
+}
 
 export class SnatchGeneratorStore {
     @observable
@@ -12,6 +20,8 @@ export class SnatchGeneratorStore {
     public peopleCount: number;
     @observable
     public playerGraph: number[] = [];
+    @observable
+    public players: IPlayer[] = [];
     @observable
     public playerCount: number;
     @observable
@@ -28,6 +38,19 @@ export class SnatchGeneratorStore {
     public iterationMax: number = 600;
     @observable
     public iterationsInMinute: number = 60;
+
+    @computed
+    public get playersPie() {
+        const players = [
+            { key: "A", value: randomInteger(30, 100), color: "#aaac84" },
+            { key: "B", value: randomInteger(30, 1000), color: "#dce7c5" },
+            { key: "C", value: randomInteger(30, 40), color: "#e3a51a" },
+        ];
+
+        this.players.forEach(player => (player.color = getRandomColor()));
+
+        return players;
+    }
 
     @computed
     public get timeLeft(): string {
@@ -60,7 +83,14 @@ export class SnatchGeneratorStore {
             this.playerGraph.push(value + this.playerCount);
             this.playerCount += value;
             for (let i = 0; i < value; i++) {
-                this.bank += randomInteger(30, 1000);
+                const sumBet = randomInteger(30, 1000);
+                this.bank += sumBet;
+
+                this.players.push({
+                    key: uuid.v1(),
+                    value: sumBet,
+                    color: "",
+                });
             }
         }
 
