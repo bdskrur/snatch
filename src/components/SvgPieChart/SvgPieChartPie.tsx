@@ -1,9 +1,14 @@
 import * as React from "react";
 import { SvgPieChartSlice } from "./SvgPieChartSlice";
 
+export interface ISvgPieChartPie {
+    value: number;
+    fill: string;
+    stroke: string;
+}
+
 interface IProps {
-    data: any;
-    colors: any;
+    data: ISvgPieChartPie[];
     hole: any;
     radius: any;
     labels?: any;
@@ -14,10 +19,9 @@ interface IProps {
 
 export class SvgPieChartPie extends React.Component<IProps> {
     public render() {
-        const { colors, labels, hole, radius, data } = this.props;
-        const sum = data.reduce((carry: any, current: any) => carry + current, 0);
+        const { labels, hole, radius, data } = this.props;
+        const sum = data.map(pie => pie.value).reduce((carry: any, current: any) => carry + current, 0);
         const diameter = radius * 2;
-        const colorsLength = colors.length;
 
         let startAngle = 0;
 
@@ -28,16 +32,16 @@ export class SvgPieChartPie extends React.Component<IProps> {
                 viewBox={"0 0 " + diameter + " " + diameter}
                 xmlns="http://www.w3.org/2000/svg"
                 version="1.1">
-                {data.map((slice: any, sliceIndex: any) => {
+                {data.map((slice, sliceIndex) => {
                     const nextAngle = startAngle;
-                    const angle = (slice / sum) * 360;
-                    const percent = (slice / sum) * 100;
+                    const angle = (slice.value / sum) * 360;
+                    const percent = (slice.value / sum) * 100;
                     startAngle += angle;
 
                     return (
                         <SvgPieChartSlice
                             key={sliceIndex}
-                            value={slice}
+                            value={slice.value}
                             percent={this.props.percent}
                             percentValue={percent.toFixed(1)}
                             startAngle={nextAngle}
@@ -46,8 +50,8 @@ export class SvgPieChartPie extends React.Component<IProps> {
                             hole={radius - hole}
                             trueHole={hole}
                             showLabel={labels}
-                            fill={colors[sliceIndex % colorsLength]}
-                            stroke={this.props.stroke}
+                            fill={slice.fill}
+                            stroke={slice.stroke}
                             strokeWidth={this.props.strokeWidth}
                         />
                     );

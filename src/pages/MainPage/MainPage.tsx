@@ -24,7 +24,7 @@ export class MainPage extends React.Component<IProps> {
         return (
             <PageWithWorkspace>
                 <PageWithWorkspace.Body>
-                    <SvgPieChart data={this.snatchGeneratorStore.playersPie.map(item => item.value)} />
+                    <SvgPieChart data={this.snatchGeneratorStore.playersPie} />
                 </PageWithWorkspace.Body>
                 <PageWithWorkspace.Bar>
                     <RateForm />

@@ -1,14 +1,12 @@
 import * as React from "react";
-import { SvgPieChartPie } from "./SvgPieChartPie";
-
-const colors = ["#43A19E", "#7B43A1", "#F2317A", "#FF9824", "#58CF6C"];
+import { ISvgPieChartPie, SvgPieChartPie } from "./SvgPieChartPie";
 
 interface IProps {
-    data: any;
+    data: ISvgPieChartPie[];
 }
 
 interface IState {
-    data: any;
+    data: ISvgPieChartPie[];
 }
 
 export class SvgPieChart extends React.Component<IProps, IState> {
@@ -47,10 +45,9 @@ export class SvgPieChart extends React.Component<IProps, IState> {
                     data={this.state.data}
                     radius={150}
                     hole={50}
-                    colors={colors}
                     labels={true}
                     percent={true}
-                    strokeWidth={3}
+                    strokeWidth={1}
                     stroke={"none"}
                 />
 

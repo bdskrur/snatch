@@ -2,6 +2,7 @@ import { action, computed, observable } from "mobx";
 import { PeriodicalAction } from "../utils/periodicalAction";
 import { randomInteger } from "../utils/math";
 import * as uuid from "uuid";
+import { ISvgPieChartPie } from "../components/SvgPieChart/SvgPieChartPie";
 // import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
@@ -21,11 +22,20 @@ interface IBet {
     prediction: number;
 }
 
-interface ICapitalSegment {
-    color: string;
-    value: number;
-    key: string;
-}
+const segmentsStyles = [
+    {
+        fill: "rgba(42, 167, 109, 0.20)",
+        stroke: "none",
+    },
+    {
+        fill: "rgba(152, 152, 48, 0.20)",
+        stroke: "none",
+    },
+    {
+        fill: "rgba(115, 42, 42, 0.4)",
+        stroke: "none",
+    },
+];
 
 export class SnatchGeneratorStore {
     @observable
@@ -52,7 +62,7 @@ export class SnatchGeneratorStore {
     }
 
     @computed
-    public get playersPie(): ICapitalSegment[] {
+    public get playersPie(): ISvgPieChartPie[] {
         let segments = [];
         const segmentsCount = MAX_SEGMENTS_COUNT;
         const segmentStep = (this.maxCapitalPlayer - this.minCapitalPlayer) / segmentsCount;
@@ -68,8 +78,8 @@ export class SnatchGeneratorStore {
             }
             console.log(this.players.map(player => player.cash).join(", "));
             segments.push({
-                color: "",
-                key: `${i}`,
+                fill: segmentsStyles[i - 1].fill,
+                stroke: segmentsStyles[i - 1].stroke,
                 value: playersS.length,
             });
         }
