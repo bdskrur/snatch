@@ -42,33 +42,38 @@ export class SnatchGeneratorStore {
     }
     @computed
     public get maxCapitalPlayer(): number {
-        return this.players.sort((a, b) => (a.cash > b.cash ? -1 : 1))[0].cash;
+        const players = this.players.sort((a, b) => (a.cash > b.cash ? -1 : 1));
+        return players.length ? players[0].cash : 0;
     }
     @computed
     public get minCapitalPlayer(): number {
-        return this.players.sort((a, b) => (a.cash > b.cash ? 1 : -1))[0].cash;
+        const players = this.players.sort((a, b) => (a.cash > b.cash ? 1 : -1));
+        return players.length ? players[0].cash : 0;
     }
 
     @computed
     public get playersPie(): ICapitalSegment[] {
-        if (this.players.length < 4) {
-            return [];
-        }
-
         let segments = [];
         const segmentsCount = MAX_SEGMENTS_COUNT;
         const segmentStep = (this.maxCapitalPlayer - this.minCapitalPlayer) / segmentsCount;
 
         for (let i = 1; i <= segmentsCount; i++) {
-            const playersS = this.players.filter(
-                player => player.cash <= i * segmentStep && player.cash > (i === 1 ? 0 : (i - 1) * segmentStep)
+            let playersS = this.players.filter(
+                player =>
+                    player.cash <= i * segmentStep + this.minCapitalPlayer &&
+                    player.cash > (i === 1 ? 0 : (i - 1) * segmentStep + this.minCapitalPlayer)
             );
+            if (this.players.length === 1 && i === 1) {
+                playersS = this.players;
+            }
+            console.log(this.players.map(player => player.cash).join(", "));
             segments.push({
                 color: "",
                 key: `${i}`,
                 value: playersS.length,
             });
         }
+        console.log(segments.map(segment => segment.value).join(", "));
         segments = segments.filter(segment => segment.value);
         return segments.length < 2 ? [] : segments;
 
