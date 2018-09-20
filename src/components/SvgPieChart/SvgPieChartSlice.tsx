@@ -79,9 +79,11 @@ export class SvgPieChartSlice extends React.Component<IProps, IState> {
 
         step = p.angle / (37.5 / 2);
 
-        if (s + step > p.angle) {
-            s = p.angle;
-        }
+        s = p.angle;
+        // animate
+        // if (s + step > p.angle) {
+        //     s = p.angle;
+        // }
 
         // Get angle points
         a = getAnglePoint(p.startAngle, p.startAngle + s, p.radius, p.radius, p.radius);

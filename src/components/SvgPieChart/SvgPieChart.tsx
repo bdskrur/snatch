@@ -43,16 +43,16 @@ export class SvgPieChart extends React.Component<IProps, IState> {
     public render() {
         return (
             <div>
-                {/*<SvgPieChartPie*/}
-                {/*data={this.state.data}*/}
-                {/*radius={150}*/}
-                {/*hole={50}*/}
-                {/*colors={colors}*/}
-                {/*labels={true}*/}
-                {/*percent={true}*/}
-                {/*strokeWidth={3}*/}
-                {/*stroke={"#fff"}*/}
-                {/*/>*/}
+                <SvgPieChartPie
+                    data={this.state.data}
+                    radius={150}
+                    hole={50}
+                    colors={colors}
+                    labels={true}
+                    percent={true}
+                    strokeWidth={3}
+                    stroke={"none"}
+                />
 
                 {/*<SvgPieChartPie*/}
                 {/*data={this.state.data}*/}
@@ -63,7 +63,7 @@ export class SvgPieChart extends React.Component<IProps, IState> {
                 {/*labels={true}*/}
                 {/*/>*/}
 
-                <SvgPieChartPie data={this.state.data} radius={80} hole={65} colors={colors} strokeWidth={1} />
+                {/*<SvgPieChartPie data={this.state.data} radius={120} hole={65} colors={colors} strokeWidth={1} />*/}
 
                 {/*<SvgPieChartPie*/}
                 {/*data={this.state.data}*/}

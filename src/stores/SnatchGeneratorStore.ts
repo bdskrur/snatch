@@ -8,7 +8,7 @@ import { generateName } from "../utils/names";
 const BET_CHANGE_VALUE = 30;
 const BANK_CHANGE_VALUE = 100;
 
-const MAX_SEGMENTS_COUNT = 5;
+const MAX_SEGMENTS_COUNT = 3;
 
 interface IPeople {
     name: string;
@@ -37,27 +37,40 @@ export class SnatchGeneratorStore {
     }
     @computed
     public get playersCapitalization(): number {
-        return this.peoples
-            .filter(people => people.bet)
+        return this.players
             .map(people => people.cash)
-            .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+            .reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue), 0);
+    }
+    @computed
+    public get maxCapitalPlayer(): number {
+        return this.players.sort((a, b) => (a.cash > b.cash ? -1 : 1))[0].cash;
+    }
+    @computed
+    public get minCapitalPlayer(): number {
+        return this.players.sort((a, b) => (a.cash > b.cash ? 1 : -1))[0].cash;
     }
 
     @computed
     public get playersPie(): ICapitalSegment[] {
+        if (this.players.length < 4) {
+            return [];
+        }
+
         const segments = [];
-        const segmentsCount = this.players.length <= MAX_SEGMENTS_COUNT ? this.players.length - 1 : MAX_SEGMENTS_COUNT;
-        const segmentStep = this.playersCapitalization / segmentsCount;
+        const segmentsCount = MAX_SEGMENTS_COUNT;
+        const segmentStep = (this.maxCapitalPlayer - this.minCapitalPlayer) / segmentsCount;
         for (let i = 1; i <= segmentsCount; i++) {
+            const playersS = this.players.filter(
+                player => player.cash <= i * segmentStep && player.cash > (i === 1 ? 0 : (i - 1) * segmentStep)
+            );
             segments.push({
                 color: "",
                 key: `${i}`,
-                value: this.players
-                    .filter(player => player.cash < i * segmentStep)
-                    .map(people => people.cash)
-                    .reduce((previousValue, currentValue) => previousValue + currentValue, 0),
+                value: playersS.length,
             });
         }
+        // segments = segments.filter(segment => segment.value);
+        console.log(segments.map(segment => segment.value).join(" ,"));
         return segments;
     }
 
@@ -105,7 +118,7 @@ export class SnatchGeneratorStore {
         this.peoples.push({
             name: generateName(),
             id: uuid.v4(),
-            cash: randomInteger(30, 500000),
+            cash: randomInteger(1, 10000),
         });
     };
 
@@ -136,13 +149,13 @@ export class SnatchGeneratorStore {
         }
         this.iteration++;
 
-        if (randomInteger(1, 10) < 5) {
+        if (randomInteger(1, 10) < 8) {
             this.addRandomPeople();
         }
         if (randomInteger(1, 10) < 2) {
             this.removeRandomPeople();
         }
-        if (randomInteger(1, 10) < 3) {
+        if (randomInteger(1, 10) < 5) {
             this.addRandomPlayer();
         }
     };
@@ -177,8 +190,18 @@ export class SnatchGeneratorStore {
         this.myPrediction -= BANK_CHANGE_VALUE;
     };
 
+    @action
     public sendBet = () => {
-        // sd
+        this.peoples.push({
+            name: uuid.v4(),
+            id: uuid.v4(),
+            cash: this.myBet,
+            bet: {
+                value: 30,
+                prediction: 30,
+            },
+        });
+        this.myBet = 0;
     };
 
     public addPeopleAction: PeriodicalAction = new PeriodicalAction(this.addPeople, 1000);

@@ -82,6 +82,7 @@
     "react-ace": "^6.1.4",
     "react-dev-utils-for-webpack4": "^5.0.0-webpack4",
     "react-docgen-typescript-loader": "^2.0.3",
+    "react-minimal-pie-chart": "^3.3.0",
     "react-scroll": "^1.7.10",
     "react-stickynode": "^2.0.1",
     "tslint": "^5.7.0",
