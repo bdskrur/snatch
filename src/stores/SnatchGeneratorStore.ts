@@ -2,30 +2,64 @@ import { action, computed, observable } from "mobx";
 import { PeriodicalAction } from "../utils/periodicalAction";
 import { randomInteger } from "../utils/math";
 import * as uuid from "uuid";
+import { generateName } from "../utils/names";
 // import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
 const BANK_CHANGE_VALUE = 100;
 
-interface IPlayer {
-    key: string;
+const MAX_SEGMENTS_COUNT = 5;
+
+interface IPeople {
+    name: string;
+    id: string;
+    cash: number;
+    bet?: IBet;
+}
+
+interface IBet {
     value: number;
+    prediction: number;
+}
+
+interface ICapitalSegment {
     color: string;
+    value: number;
+    key: string;
 }
 
 export class SnatchGeneratorStore {
     @observable
-    public peopleGraph: number[] = [];
-    @observable
-    public peopleCount: number;
-    @observable
-    public playerGraph: number[] = [];
-    @observable
-    public players: IPlayer[] = [];
-    @observable
-    public playerCount: number;
-    @observable
-    public bank: number;
+    public peoples: IPeople[] = [];
+    @computed
+    public get players(): IPeople[] {
+        return this.peoples.filter(people => people.bet);
+    }
+    @computed
+    public get playersCapitalization(): number {
+        return this.peoples
+            .filter(people => people.bet)
+            .map(people => people.cash)
+            .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+    }
+
+    @computed
+    public get playersPie(): ICapitalSegment[] {
+        const segments = [];
+        const segmentsCount = this.players.length <= MAX_SEGMENTS_COUNT ? this.players.length - 1 : MAX_SEGMENTS_COUNT;
+        const segmentStep = this.playersCapitalization / segmentsCount;
+        for (let i = 1; i <= segmentsCount; i++) {
+            segments.push({
+                color: "",
+                key: `${i}`,
+                value: this.players
+                    .filter(player => player.cash < i * segmentStep)
+                    .map(people => people.cash)
+                    .reduce((previousValue, currentValue) => previousValue + currentValue, 0),
+            });
+        }
+        return segments;
+    }
 
     @observable
     public myBet: number = 30;
@@ -39,9 +73,6 @@ export class SnatchGeneratorStore {
     @observable
     public iterationsInMinute: number = 60;
 
-    @observable
-    public playersPie: number[] = [];
-
     @computed
     public get timeLeft(): string {
         const min = Math.trunc((this.iterationMax - this.iteration - 1) / 60);
@@ -50,6 +81,46 @@ export class SnatchGeneratorStore {
 
         return `${min}:${sec}`;
     }
+
+    @action
+    private addRandomPlayer = () => {
+        if (this.peoples.length < 3) {
+            return;
+        }
+
+        const peopleIndex = randomInteger(0, this.peoples.length - 1);
+
+        if (!this.peoples[peopleIndex].bet) {
+            const bet = randomInteger(30, this.peoples[peopleIndex].cash);
+
+            this.peoples[peopleIndex].bet = {
+                value: bet,
+                prediction: randomInteger(this.players.length * 30 + bet, this.playersCapitalization),
+            };
+        }
+    };
+
+    @action
+    private addRandomPeople = () => {
+        this.peoples.push({
+            name: generateName(),
+            id: uuid.v4(),
+            cash: randomInteger(30, 500000),
+        });
+    };
+
+    @action
+    private removeRandomPeople = () => {
+        if (this.peoples.length === 0) {
+            return;
+        }
+
+        const peopleIndex = randomInteger(0, this.peoples.length - 1);
+
+        if (!this.peoples[peopleIndex].bet) {
+            this.peoples.splice(peopleIndex, 1);
+        }
+    };
 
     @action
     private addPeople = () => {
@@ -65,34 +136,14 @@ export class SnatchGeneratorStore {
         }
         this.iteration++;
 
-        if (!this.playerCount && this.playerCount !== 0) {
-            this.playerCount = 0;
-            this.playerGraph.push(this.playerCount);
-        } else {
-            const value = randomInteger(0, 2);
-            this.playerGraph.push(value + this.playerCount);
-            this.playerCount += value;
-            for (let i = 0; i < value; i++) {
-                const sumBet = randomInteger(30, 1000);
-                this.bank += sumBet;
-
-                this.players.push({
-                    key: uuid.v1(),
-                    value: sumBet,
-                    color: "",
-                });
-
-                this.playersPie = [...this.playersPie, sumBet];
-            }
+        if (randomInteger(1, 10) < 5) {
+            this.addRandomPeople();
         }
-
-        if (!this.peopleCount && this.peopleCount !== 0) {
-            this.peopleCount = 0;
-            this.peopleGraph.push(this.peopleCount);
-        } else {
-            const value = randomInteger(this.playerCount, this.playerCount + randomInteger(0, 5));
-            this.peopleGraph.push(value);
-            this.peopleCount = value;
+        if (randomInteger(1, 10) < 2) {
+            this.removeRandomPeople();
+        }
+        if (randomInteger(1, 10) < 3) {
+            this.addRandomPlayer();
         }
     };
 

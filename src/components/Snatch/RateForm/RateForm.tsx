@@ -20,9 +20,9 @@ export class RateForm extends React.Component<IProps> {
             <div className={cn("wrap")}>
                 <Gapped gap={15} vertical={true}>
                     <NumberTitle value={this.model.timeLeft} style={{ background: "#732a2a" }} />
-                    <NumberTitle value={this.model.peopleCount} title="Игроков онлайн" />
+                    <NumberTitle value={this.model.peoples.length} title="Игроков онлайн" />
                     <NumberTitle
-                        value={this.model.playerCount}
+                        value={this.model.players.length}
                         title="Игроков сделали вклад"
                         style={{ background: "rgba(2, 166, 242, 0.5)" }}
                     />
