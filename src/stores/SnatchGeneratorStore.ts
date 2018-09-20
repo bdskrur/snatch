@@ -2,7 +2,6 @@ import { action, computed, observable } from "mobx";
 import { PeriodicalAction } from "../utils/periodicalAction";
 import { randomInteger } from "../utils/math";
 import * as uuid from "uuid";
-import { generateName } from "../utils/names";
 // import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
@@ -56,9 +55,10 @@ export class SnatchGeneratorStore {
             return [];
         }
 
-        const segments = [];
+        let segments = [];
         const segmentsCount = MAX_SEGMENTS_COUNT;
         const segmentStep = (this.maxCapitalPlayer - this.minCapitalPlayer) / segmentsCount;
+
         for (let i = 1; i <= segmentsCount; i++) {
             const playersS = this.players.filter(
                 player => player.cash <= i * segmentStep && player.cash > (i === 1 ? 0 : (i - 1) * segmentStep)
@@ -69,9 +69,10 @@ export class SnatchGeneratorStore {
                 value: playersS.length,
             });
         }
-        // segments = segments.filter(segment => segment.value);
-        console.log(segments.map(segment => segment.value).join(" ,"));
-        return segments;
+        segments = segments.filter(segment => segment.value);
+        return segments.length < 2 ? [] : segments;
+
+        // return segments;
     }
 
     @observable
@@ -116,7 +117,7 @@ export class SnatchGeneratorStore {
     @action
     private addRandomPeople = () => {
         this.peoples.push({
-            name: generateName(),
+            name: uuid.v4(),
             id: uuid.v4(),
             cash: randomInteger(1, 10000),
         });
@@ -195,7 +196,7 @@ export class SnatchGeneratorStore {
         this.peoples.push({
             name: uuid.v4(),
             id: uuid.v4(),
-            cash: this.myBet,
+            cash: Number(this.myBet),
             bet: {
                 value: 30,
                 prediction: 30,
