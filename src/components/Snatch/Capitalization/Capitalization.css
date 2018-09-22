@@ -16,18 +16,25 @@
 
 .legendItem {
     position: relative;
-    padding-left: 25px;
+    padding-left: 55px;
 }
 
 .legendItemColor {
     position: absolute;
     left: 0;
-    top: calc(50% - 6px);
-    width: 15px;
-    height: 15px;
-    border-radius: 100px;
+    top: calc(50% - 8px);
+    width: 48px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 7px;
 }
 
 .legendItemText {
     color: #93a2b1;
+}
+
+.coast {
+    font-weight: bold;
+    color: #fff;
+    display: inline;
 }

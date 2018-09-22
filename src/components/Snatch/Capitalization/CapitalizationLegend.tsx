@@ -22,11 +22,19 @@ export class CapitalizationLegend extends React.Component<IProps> {
     private renderItem = (item: ICapitalizationLegendItem) => {
         return (
             <div className={cn("legendItem")}>
-                <div style={{ background: item.color }} className={cn("legendItemColor")} />
+                <div style={{ background: item.color }} className={cn("legendItemColor")}>
+                    {item.value}
+                </div>
                 <div className={cn("legendItemText")}>
-                    игроки с депозитом от {item.from} до {item.to}
+                    игрок
+                    {item.value === 1 ? "" : "ов"} с депозитом от {this.renderCoast(item.from)} до{" "}
+                    {this.renderCoast(item.to)}
                 </div>
             </div>
         );
     };
+
+    private renderCoast(value: number) {
+        return <p className={cn("coast")}>{value}</p>;
+    }
 }
