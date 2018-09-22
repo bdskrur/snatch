@@ -4,6 +4,7 @@ import { RootStore } from "../../../stores";
 import { SvgPieChartPie } from "../../SvgPieChart/SvgPieChartPie";
 import { CapitalizationLegend } from "./CapitalizationLegend";
 import cn from "./Capitalization.css";
+import { formatSize } from "../../../utils/historyHelpers";
 
 interface IProps {
     rootStore?: RootStore;
@@ -18,9 +19,11 @@ export class Capitalization extends React.Component<IProps> {
                 <CapitalizationLegend data={this.snatchGeneratorStore.playersSegmentsLegend} />
                 <SvgPieChartPie
                     data={this.snatchGeneratorStore.playersSegmentsPie}
-                    radius={150}
-                    hole={120}
+                    radius={120}
+                    hole={90}
                     labels={true}
+                    centerText={formatSize(this.snatchGeneratorStore.playersCapitalization) + "$"}
+                    centerTitle="Сумма Капитализации"
                 />
             </div>
         );

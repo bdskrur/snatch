@@ -1,0 +1,21 @@
+.wrap {
+    position: relative;
+}
+
+.sum {
+    width: 200px;
+    height: 60px;
+    position: absolute;
+    left: calc(50% - 100px);
+    top: calc(50% - 22px);
+    text-align: center;
+}
+.sumText {
+    font-size: 30px;
+    font-weight: bold;
+}
+.sumTitle {
+    margin-top: 5px;
+    color: #44607d;
+    font-size: 15px;
+}

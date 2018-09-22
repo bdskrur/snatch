@@ -5,13 +5,13 @@
 }
 
 .legend {
-    height: 175px;
+    height: 140px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding-bottom: 15px;
     box-sizing: border-box;
     margin-bottom: 15px;
+    padding-bottom: 10px;
 }
 
 .legendItem {
@@ -29,5 +29,5 @@
 }
 
 .legendItemText {
-
+    color: #93a2b1;
 }
