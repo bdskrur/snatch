@@ -26,15 +26,15 @@ interface IBet {
 const playersSegmentsStyles = [
     {
         fill: "rgba(42, 167, 109, 1)",
-        stroke: "none",
+        stroke: "#243445",
     },
     {
         fill: "rgba(152, 152, 48, 1)",
-        stroke: "none",
+        stroke: "#243445",
     },
     {
         fill: "rgba(115, 42, 42, 1)",
-        stroke: "none",
+        stroke: "#243445",
     },
 ];
 
@@ -93,6 +93,7 @@ export class SnatchGeneratorStore {
                 fill: playersSegmentsStyles[i - 1].fill,
                 stroke: playersSegmentsStyles[i - 1].stroke,
                 value: playersS.length,
+                strokeWidth: 3,
             });
         }
         segments = segments.filter(segment => segment.value);
@@ -105,13 +106,23 @@ export class SnatchGeneratorStore {
         const segmentStep = (this.maxCapitalPlayer - this.minCapitalPlayer) / segmentsCount;
 
         for (let i = 1; i <= segmentsCount; i++) {
+            let playersS = this.players.filter(
+                player =>
+                    player.cash <= i * segmentStep + this.minCapitalPlayer &&
+                    player.cash > (i === 1 ? 0 : (i - 1) * segmentStep + this.minCapitalPlayer)
+            );
+            if (this.players.length === 1 && i === 1) {
+                playersS = this.players;
+            }
+
             segments.push({
                 from: Math.round(i === 1 ? 0 : (i - 1) * segmentStep + this.minCapitalPlayer),
                 to: i * Math.round(segmentStep + this.minCapitalPlayer),
                 color: playersSegmentsStyles[i - 1].fill,
+                value: playersS.length,
             });
         }
-        segments = segments.filter(segment => segment.from || segment.to);
+        segments = segments.filter(segment => segment.value);
         return segments;
     }
     @computed

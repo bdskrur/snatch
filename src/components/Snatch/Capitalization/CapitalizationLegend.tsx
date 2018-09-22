@@ -4,6 +4,7 @@ import cn from "./Capitalization.css";
 export interface ICapitalizationLegendItem {
     from: number;
     to: number;
+    value: number;
     color: string;
 }
 
@@ -23,7 +24,7 @@ export class CapitalizationLegend extends React.Component<IProps> {
             <div className={cn("legendItem")}>
                 <div style={{ background: item.color }} className={cn("legendItemColor")} />
                 <div className={cn("legendItemText")}>
-                    игроков имеют депозит от {item.from} до {item.to}
+                    игроки с депозитом от {item.from} до {item.to}
                 </div>
             </div>
         );

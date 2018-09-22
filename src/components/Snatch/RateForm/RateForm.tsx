@@ -21,7 +21,7 @@ export class RateForm extends React.Component<IProps> {
                 <Gapped gap={15} vertical={true}>
                     <NumberTitle
                         value={this.model.timeLeft}
-                        title="Конец приема вкладов"
+                        title="До конца приема вкладов"
                         style={{ background: "rgb(31, 45, 60)" }}
                     />
                     <WrapperForInput title="Вклад" hint="Минимальный вклад 30">
