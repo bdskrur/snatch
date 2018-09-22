@@ -1,5 +1,4 @@
 .column {
-    flex: 1;
 }
 .column:not(:last-child) {
     padding-right: 20px;
