@@ -1,0 +1,33 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legend {
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 15px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.legendItem {
+    position: relative;
+    padding-left: 25px;
+}
+
+.legendItemColor {
+    position: absolute;
+    left: 0;
+    top: calc(50% - 6px);
+    width: 15px;
+    height: 15px;
+    border-radius: 100px;
+}
+
+.legendItemText {
+
+}

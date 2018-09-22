@@ -48,10 +48,15 @@ export class SvgPieChartSlice extends React.Component<IProps, IState> {
                     d={this.state.path}
                     fill={this.props.fill}
                     stroke={this.props.stroke}
-                    strokeWidth={this.props.strokeWidth ? this.props.strokeWidth : 3}
+                    strokeWidth={this.props.strokeWidth ? this.props.strokeWidth : 1}
                 />
                 {this.props.showLabel && this.props.percentValue > 5 ? (
-                    <text x={this.state.x} y={this.state.y} fill="#fff" textAnchor="middle">
+                    <text
+                        x={this.state.x}
+                        y={this.state.y}
+                        fill="#fff"
+                        textAnchor="middle"
+                        style={{ font: "bold 14px sans-serif" }}>
                         {this.props.percent ? this.props.percentValue + "%" : this.props.value}
                     </text>
                 ) : null}

@@ -60,7 +60,7 @@ export class SvgPieChart extends React.Component<IProps, IState> {
                 {/*labels={true}*/}
                 {/*/>*/}
 
-                <SvgPieChartPie data={this.state.data} radius={120} hole={65} strokeWidth={1} />
+                <SvgPieChartPie data={this.state.data} radius={120} hole={65} />
 
                 {/*<SvgPieChartPie*/}
                 {/*data={this.state.data}*/}

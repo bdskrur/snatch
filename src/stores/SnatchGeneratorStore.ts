@@ -3,6 +3,7 @@ import { PeriodicalAction } from "../utils/periodicalAction";
 import { randomInteger } from "../utils/math";
 import * as uuid from "uuid";
 import { ISvgPieChartPie } from "../components/SvgPieChart/SvgPieChartPie";
+import { ICapitalizationLegendItem } from "../components/Snatch/Capitalization/CapitalizationLegend";
 // import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
@@ -24,27 +25,28 @@ interface IBet {
 
 const playersSegmentsStyles = [
     {
-        fill: "rgba(42, 167, 109, 0.20)",
+        fill: "rgba(42, 167, 109, 1)",
         stroke: "none",
     },
     {
-        fill: "rgba(152, 152, 48, 0.20)",
+        fill: "rgba(152, 152, 48, 1)",
         stroke: "none",
     },
     {
-        fill: "rgba(115, 42, 42, 0.4)",
+        fill: "rgba(115, 42, 42, 1)",
         stroke: "none",
     },
 ];
 
 const playersVsPeoplesStyles = {
-    peoles: {
+    peoples: {
         fill: "rgb(31, 45, 60)",
-        stroke: "none",
+        stroke: "#1e2a38",
     },
     players: {
-        fill: "rgba(2, 166, 242, 0.5)",
-        stroke: "none",
+        fill: "rgba(2, 166, 242, 0.15)",
+        stroke: "rgba(2, 166, 242, 1)",
+        strokeWidth: 2,
     },
 };
 
@@ -97,12 +99,28 @@ export class SnatchGeneratorStore {
         return segments.length < 2 ? [] : segments;
     }
     @computed
+    public get playersSegmentsLegend(): ICapitalizationLegendItem[] {
+        let segments = [];
+        const segmentsCount = MAX_SEGMENTS_COUNT;
+        const segmentStep = (this.maxCapitalPlayer - this.minCapitalPlayer) / segmentsCount;
+
+        for (let i = 1; i <= segmentsCount; i++) {
+            segments.push({
+                from: Math.round(i === 1 ? 0 : (i - 1) * segmentStep + this.minCapitalPlayer),
+                to: i * Math.round(segmentStep + this.minCapitalPlayer),
+                color: playersSegmentsStyles[i - 1].fill,
+            });
+        }
+        segments = segments.filter(segment => segment.from || segment.to);
+        return segments;
+    }
+    @computed
     public get playersVsPeoplesPie(): ISvgPieChartPie[] {
         const segments = [];
 
         segments.push({
-            fill: playersVsPeoplesStyles.peoles.fill,
-            stroke: playersVsPeoplesStyles.peoles.stroke,
+            fill: playersVsPeoplesStyles.peoples.fill,
+            stroke: playersVsPeoplesStyles.peoples.stroke,
             value: this.peoples.length,
         });
         segments.push({

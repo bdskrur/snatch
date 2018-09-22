@@ -5,6 +5,7 @@ export interface ISvgPieChartPie {
     value: number;
     fill: string;
     stroke: string;
+    strokeWidth?: number;
 }
 
 interface IProps {
@@ -14,7 +15,6 @@ interface IProps {
     labels?: any;
     percent?: boolean;
     stroke?: any;
-    strokeWidth?: any;
 }
 
 export class SvgPieChartPie extends React.Component<IProps> {
@@ -27,6 +27,7 @@ export class SvgPieChartPie extends React.Component<IProps> {
 
         return (
             <svg
+                style={{ overflow: "visible" }}
                 width={diameter}
                 height={diameter}
                 viewBox={"0 0 " + diameter + " " + diameter}
@@ -52,7 +53,7 @@ export class SvgPieChartPie extends React.Component<IProps> {
                             showLabel={labels}
                             fill={slice.fill}
                             stroke={slice.stroke}
-                            strokeWidth={this.props.strokeWidth}
+                            strokeWidth={slice.strokeWidth}
                         />
                     );
                 })}
