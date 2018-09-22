@@ -10,4 +10,14 @@
 .body {
     flex: 1;
     padding-right: 20px;
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.column:not(:last-child) {
+    margin-right: 20px;
 }

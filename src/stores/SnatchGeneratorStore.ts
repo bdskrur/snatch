@@ -22,7 +22,7 @@ interface IBet {
     prediction: number;
 }
 
-const segmentsStyles = [
+const playersSegmentsStyles = [
     {
         fill: "rgba(42, 167, 109, 0.20)",
         stroke: "none",
@@ -36,6 +36,17 @@ const segmentsStyles = [
         stroke: "none",
     },
 ];
+
+const playersVsPeoplesStyles = {
+    peoles: {
+        fill: "rgb(31, 45, 60)",
+        stroke: "none",
+    },
+    players: {
+        fill: "rgba(2, 166, 242, 0.5)",
+        stroke: "none",
+    },
+};
 
 export class SnatchGeneratorStore {
     @observable
@@ -62,7 +73,7 @@ export class SnatchGeneratorStore {
     }
 
     @computed
-    public get playersPie(): ISvgPieChartPie[] {
+    public get playersSegmentsPie(): ISvgPieChartPie[] {
         let segments = [];
         const segmentsCount = MAX_SEGMENTS_COUNT;
         const segmentStep = (this.maxCapitalPlayer - this.minCapitalPlayer) / segmentsCount;
@@ -76,18 +87,31 @@ export class SnatchGeneratorStore {
             if (this.players.length === 1 && i === 1) {
                 playersS = this.players;
             }
-            console.log(this.players.map(player => player.cash).join(", "));
             segments.push({
-                fill: segmentsStyles[i - 1].fill,
-                stroke: segmentsStyles[i - 1].stroke,
+                fill: playersSegmentsStyles[i - 1].fill,
+                stroke: playersSegmentsStyles[i - 1].stroke,
                 value: playersS.length,
             });
         }
-        console.log(segments.map(segment => segment.value).join(", "));
         segments = segments.filter(segment => segment.value);
         return segments.length < 2 ? [] : segments;
+    }
+    @computed
+    public get playersVsPeoplesPie(): ISvgPieChartPie[] {
+        const segments = [];
 
-        // return segments;
+        segments.push({
+            fill: playersVsPeoplesStyles.peoles.fill,
+            stroke: playersVsPeoplesStyles.peoles.stroke,
+            value: this.peoples.length,
+        });
+        segments.push({
+            fill: playersVsPeoplesStyles.players.fill,
+            stroke: playersVsPeoplesStyles.players.stroke,
+            value: this.players.length,
+        });
+
+        return segments;
     }
 
     @observable
