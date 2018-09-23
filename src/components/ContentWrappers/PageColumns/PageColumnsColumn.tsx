@@ -1,16 +1,17 @@
 import * as React from "react";
-import cn from "./PageColumn.css";
+import cn from "./PageColumns.css";
 import Gapped from "retail-ui/components/Gapped/Gapped";
+import { CSSProperties } from "react";
 
 interface IProps {
-    width?: number;
+    style?: CSSProperties;
 }
 
-export class PageColumn extends React.Component<IProps> {
+export class PageColumnsColumn extends React.Component<IProps> {
     public render() {
-        const { width } = this.props;
+        const { style } = this.props;
         return (
-            <div className={cn("column")} style={{ width }}>
+            <div className={cn("column")} style={style}>
                 <Gapped vertical={true} gap={20}>
                     {this.props.children}
                 </Gapped>

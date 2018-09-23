@@ -5,6 +5,7 @@ import { RootStore } from "../../stores";
 import { Capitalization } from "../../components/Snatch/Capitalization/Capitalization";
 import { PageColumns } from "../../components/ContentWrappers/PageColumns/PageColumns";
 import { PeoplesVsPlayers } from "../../components/Snatch/PeoplesVsPlayers/PeoplesVsPlayers";
+import { Tabs } from "../../components/Tabs/Tabs";
 
 interface IProps {
     rootStore?: RootStore;
@@ -24,15 +25,26 @@ export class MainPage extends React.Component<IProps> {
     public render() {
         return (
             <PageColumns>
-                <PageColumns.Column>
-                    <PeoplesVsPlayers />
-                </PageColumns.Column>
-                <PageColumns.Column>
-                    <Capitalization />
-                </PageColumns.Column>
-                <PageColumns.Column width={300}>
-                    <RateForm />
-                </PageColumns.Column>
+                <PageColumns.Row>
+                    <PageColumns.Column>
+                        <PeoplesVsPlayers />
+                    </PageColumns.Column>
+                    <PageColumns.Column>
+                        <Capitalization />
+                    </PageColumns.Column>
+                    <PageColumns.Column style={{ width: 300 }}>
+                        <RateForm />
+                    </PageColumns.Column>
+                </PageColumns.Row>
+                <PageColumns.Row>
+                    <PageColumns.Column style={{ flex: 1 }}>
+                        <Tabs
+                            tabs={this.snatchGeneratorStore.tabs}
+                            value={this.snatchGeneratorStore.activeTabName}
+                            onChange={this.snatchGeneratorStore.onChangeTab}
+                        />
+                    </PageColumns.Column>
+                </PageColumns.Row>
             </PageColumns>
         );
     }

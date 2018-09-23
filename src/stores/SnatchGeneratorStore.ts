@@ -4,6 +4,7 @@ import { randomInteger } from "../utils/math";
 import * as uuid from "uuid";
 import { ISvgPieChartPie } from "../components/SvgPieChart/SvgPieChartPie";
 import { ICapitalizationLegendItem } from "../components/Snatch/Capitalization/CapitalizationLegend";
+import { ITab } from "../components/Tabs/Tabs";
 // import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
@@ -155,6 +156,24 @@ export class SnatchGeneratorStore {
     @observable
     public iterationsInMinute: number = 60;
 
+    public tabs: ITab[] = [
+        {
+            name: "myBets",
+            title: "Мои вклады",
+        },
+        {
+            name: "events",
+            title: "События",
+        },
+    ];
+    @observable
+    public activeTabName: string = this.tabs[0]!.name;
+
+    @action
+    public onChangeTab = (name: string) => {
+        this.activeTabName = name;
+    };
+
     @computed
     public get timeLeft(): string {
         const min = Math.trunc((this.iterationMax - this.iteration - 1) / 60);
@@ -166,7 +185,7 @@ export class SnatchGeneratorStore {
 
     @action
     private addRandomPlayer = () => {
-        if (this.peoples.length < 3) {
+        if (this.peoples.length < 2) {
             return;
         }
 
@@ -187,7 +206,7 @@ export class SnatchGeneratorStore {
         this.peoples.push({
             name: uuid.v4(),
             id: uuid.v4(),
-            cash: randomInteger(1, 10000),
+            cash: randomInteger(30, 1000),
         });
     };
 

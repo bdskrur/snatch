@@ -1,0 +1,11 @@
+.column {
+}
+.column:not(:last-child) {
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}

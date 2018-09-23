@@ -21,7 +21,7 @@ export class Capitalization extends React.Component<IProps> {
                     data={this.snatchGeneratorStore.playersSegmentsPie}
                     radius={120}
                     hole={90}
-                    centerText={formatSize(this.snatchGeneratorStore.playersCapitalization) + "$"}
+                    centerText={formatSize(this.snatchGeneratorStore.playersCapitalization) + " $"}
                     centerTitle="Сумма Капитализации"
                 />
             </div>
