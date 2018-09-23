@@ -1,10 +1,23 @@
 .wrap {
-
+    display: flex;
 }
 
 .tab {
-
+    padding: 5px 15px;
+    font-weight: bold;
+    color: #5a6e84;
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
 }
-.tabActive {
-
+.tab:hover {
+    background: rgba(49, 70, 93, 0.33);
+}
+.tab:first-child {
+    border-radius: 15px 3px 0 0;
+}
+.tab.tabActive,
+.tab.tabActive:hover {
+    background: #1f2d3c;
+    cursor: default;
+    color: #bcc2ca;
 }

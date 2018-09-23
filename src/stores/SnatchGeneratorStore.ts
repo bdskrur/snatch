@@ -158,12 +158,12 @@ export class SnatchGeneratorStore {
 
     public tabs: ITab[] = [
         {
-            name: "myBets",
-            title: "Мои вклады",
+            name: "nowGame",
+            title: "Текущая игра",
         },
         {
-            name: "events",
-            title: "События",
+            name: "historyGames",
+            title: "Прошлые игры",
         },
     ];
     @observable
