@@ -27,7 +27,8 @@ export class Capitalization extends React.Component<IProps> {
                             <CountUp
                                 start={this.snatchGeneratorStore.playersCapitalizationPrev}
                                 end={this.snatchGeneratorStore.playersCapitalization}
-                            />
+                                separator=" "
+                            />{" "}
                             $
                         </span>
                     }
