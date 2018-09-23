@@ -27,14 +27,17 @@ interface IBet {
 const playersSegmentsStyles = [
     {
         fill: "rgba(42, 167, 109, 1)",
+        fillPhantom: "rgba(42, 167, 109, .5)",
         stroke: "#243445",
     },
     {
         fill: "rgba(152, 152, 48, 1)",
+        fillPhantom: "rgba(152, 152, 48, .5)",
         stroke: "#243445",
     },
     {
         fill: "rgba(115, 42, 42, 1)",
+        fillPhantom: "rgba(115, 42, 42, .5)",
         stroke: "#243445",
     },
 ];
@@ -42,11 +45,11 @@ const playersSegmentsStyles = [
 const playersVsPeoplesStyles = {
     peoples: {
         fill: "rgb(31, 45, 60)",
-        stroke: "#1e2a38",
+        stroke: "none",
     },
     players: {
-        fill: "rgba(2, 166, 242, 0.15)",
-        stroke: "rgba(2, 166, 242, 1)",
+        fill: "#136d9b",
+        stroke: "none",
         strokeWidth: 2,
     },
 };
@@ -119,7 +122,7 @@ export class SnatchGeneratorStore {
             segments.push({
                 from: Math.round(i === 1 ? 0 : (i - 1) * segmentStep + this.minCapitalPlayer),
                 to: i * Math.round(segmentStep + this.minCapitalPlayer),
-                color: playersSegmentsStyles[i - 1].fill,
+                color: playersSegmentsStyles[i - 1].fillPhantom,
                 value: playersS.length,
             });
         }
