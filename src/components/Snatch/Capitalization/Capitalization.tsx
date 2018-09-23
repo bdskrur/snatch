@@ -4,7 +4,8 @@ import { RootStore } from "../../../stores";
 import { SvgPieChartPie } from "../../SvgPieChart/SvgPieChartPie";
 import { CapitalizationLegend } from "./CapitalizationLegend";
 import cn from "./Capitalization.css";
-import { formatSize } from "../../../utils/historyHelpers";
+// import { formatSize } from "../../../utils/historyHelpers";
+import CountUp from "react-countup";
 
 interface IProps {
     rootStore?: RootStore;
@@ -21,7 +22,15 @@ export class Capitalization extends React.Component<IProps> {
                     data={this.snatchGeneratorStore.playersSegmentsPie}
                     radius={120}
                     hole={90}
-                    centerText={formatSize(this.snatchGeneratorStore.playersCapitalization) + " $"}
+                    centerText={
+                        <span>
+                            <CountUp
+                                start={this.snatchGeneratorStore.playersCapitalizationPrev}
+                                end={this.snatchGeneratorStore.playersCapitalization}
+                            />
+                            $
+                        </span>
+                    }
                     centerTitle="Сумма Капитализации"
                 />
             </div>

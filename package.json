@@ -80,6 +80,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "prettier": "1.14.2",
     "react-ace": "^6.1.4",
+    "react-countup": "^4.0.0-alpha.6",
     "react-dev-utils-for-webpack4": "^5.0.0-webpack4",
     "react-docgen-typescript-loader": "^2.0.3",
     "react-minimal-pie-chart": "^3.3.0",

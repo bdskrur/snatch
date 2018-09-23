@@ -16,7 +16,7 @@ interface IProps {
     labels?: any;
     percent?: boolean;
     stroke?: any;
-    centerText?: string;
+    centerText?: string | JSX.Element;
     centerTitle?: string;
 }
 

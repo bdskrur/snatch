@@ -63,10 +63,23 @@ export class SnatchGeneratorStore {
     }
     @computed
     public get playersCapitalization(): number {
-        return this.players
+        return (this.playersCapitalizationPrev = this.players
             .map(people => people.cash)
-            .reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue), 0);
+            .reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue), 0));
     }
+    public playersCapitalizationPrev: number = 0;
+    // @computed
+    // public get playersCapitalizationPrev(): number {
+    //     if (this.players.length < 2) {
+    //         return 0;
+    //     }
+    //     const value = this.players
+    //         .map(people => people.cash)
+    //         .slice(0, this.players.length - 2)
+    //         .reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue), 0);
+    //     console.log(value);
+    //     return value;
+    // }
     @computed
     public get maxCapitalPlayer(): number {
         const players = this.players.sort((a, b) => (a.cash > b.cash ? -1 : 1));
