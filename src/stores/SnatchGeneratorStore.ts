@@ -179,7 +179,7 @@ export class SnatchGeneratorStore {
         },
         {
             name: "historyGames",
-            title: "Прошлые игры",
+            title: "История вкладов",
         },
     ];
     @observable

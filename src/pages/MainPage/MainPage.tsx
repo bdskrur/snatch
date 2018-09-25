@@ -6,6 +6,7 @@ import { Capitalization } from "../../components/Snatch/Capitalization/Capitaliz
 import { PageColumns } from "../../components/ContentWrappers/PageColumns/PageColumns";
 import { PeoplesVsPlayers } from "../../components/Snatch/PeoplesVsPlayers/PeoplesVsPlayers";
 import { Events } from "../../components/Snatch/Events/Events";
+import { Tabs } from "../../components/Tabs/Tabs";
 
 interface IProps {
     rootStore?: RootStore;
@@ -38,7 +39,14 @@ export class MainPage extends React.Component<IProps> {
                 </PageColumns.Row>
                 <PageColumns.Row>
                     <PageColumns.Column style={{ flex: 1 }}>
-                        <Events />
+                        <div>
+                            <Tabs
+                                tabs={this.snatchGeneratorStore.tabs}
+                                value={this.snatchGeneratorStore.activeTabName}
+                                onChange={this.snatchGeneratorStore.onChangeTab}
+                            />
+                            {this.snatchGeneratorStore.activeTabName === "nowGame" ? <Events /> : null}
+                        </div>
                     </PageColumns.Column>
                 </PageColumns.Row>
             </PageColumns>
