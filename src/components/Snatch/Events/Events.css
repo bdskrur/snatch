@@ -1,0 +1,35 @@
+.events {
+    padding: 5px 10px 10px 10px;
+    min-height: 200px;
+    background: #1f2d3c;
+}
+
+.event {
+    padding: 5px 0;
+    margin-bottom: 10px;
+    overflow: hidden;
+
+    transition: 0.3s ease-out;
+}
+
+.topContainer {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #243445;
+    padding-bottom: 5px;
+}
+
+.playerName {
+    color: #136d9b;
+    font-weight: bold;
+}
+
+.time {
+    font-weight: bold;
+    color: #9ea8b3;
+}
+
+.message {
+    color: #6a8098;
+    font-weight: bold;
+}

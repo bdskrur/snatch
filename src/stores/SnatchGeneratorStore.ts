@@ -5,6 +5,9 @@ import * as uuid from "uuid";
 import { ISvgPieChartPie } from "../components/SvgPieChart/SvgPieChartPie";
 import { ICapitalizationLegendItem } from "../components/Snatch/Capitalization/CapitalizationLegend";
 import { ITab } from "../components/Tabs/Tabs";
+import { IEvent } from "../components/Snatch/Events/Event";
+import { generateName } from "../utils/names";
+import { formatTime_hh_mm_ss } from "../utils/date";
 // import { getRandomColor } from "../utils/color";
 
 const BET_CHANGE_VALUE = 30;
@@ -68,18 +71,7 @@ export class SnatchGeneratorStore {
             .reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue), 0));
     }
     public playersCapitalizationPrev: number = 0;
-    // @computed
-    // public get playersCapitalizationPrev(): number {
-    //     if (this.players.length < 2) {
-    //         return 0;
-    //     }
-    //     const value = this.players
-    //         .map(people => people.cash)
-    //         .slice(0, this.players.length - 2)
-    //         .reduce((previousValue, currentValue) => Number(previousValue) + Number(currentValue), 0);
-    //     console.log(value);
-    //     return value;
-    // }
+
     @computed
     public get maxCapitalPlayer(): number {
         const players = this.players.sort((a, b) => (a.cash > b.cash ? -1 : 1));
@@ -161,6 +153,13 @@ export class SnatchGeneratorStore {
     }
 
     @observable
+    private eventsData: IEvent[] = [];
+    @computed
+    public get eventsView() {
+        return this.eventsData.slice(0, 10).reverse();
+    }
+
+    @observable
     public myBet: number = 30;
     @observable
     public myPrediction: number = 0;
@@ -214,13 +213,21 @@ export class SnatchGeneratorStore {
                 value: bet,
                 prediction: randomInteger(this.players.length * 30 + bet, this.playersCapitalization),
             };
+
+            const timeNow = formatTime_hh_mm_ss(new Date());
+
+            this.eventsData.unshift({
+                playerName: this.peoples[peopleIndex].name,
+                time: timeNow,
+                message: "Сделал ставку хххххх/ххххххххх",
+            });
         }
     };
 
     @action
     private addRandomPeople = () => {
         this.peoples.push({
-            name: uuid.v4(),
+            name: generateName(),
             id: uuid.v4(),
             cash: randomInteger(30, 1000),
         });
@@ -305,6 +312,15 @@ export class SnatchGeneratorStore {
                 prediction: 30,
             },
         });
+
+        const timeNow = formatTime_hh_mm_ss(new Date());
+
+        this.eventsData.push({
+            playerName: generateName(),
+            time: timeNow,
+            message: "Сделал ставку хххххх/ххххххххх",
+        });
+
         this.myBet = 0;
     };
 

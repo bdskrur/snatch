@@ -28,6 +28,14 @@ function format(date: Date) {
     return [year, month, day, hours, minutes, seconds];
 }
 
+export function formatTime_hh_mm_ss(data: Date) {
+    return addZero(data.getHours()) + ":" + addZero(data.getMinutes()) + ":" + addZero(data.getSeconds());
+}
+
+function addZero(value: number) {
+    return value < 10 ? `0${value}` : value;
+}
+
 export function formatDateForLogs(date: Date) {
     const [year, month, day, hours, minutes, seconds] = format(date);
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;

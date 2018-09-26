@@ -1,6 +1,8 @@
 import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { RootStore } from "../../../stores";
+import { Event } from "./Event";
+import cn from "./Events.css";
 
 interface IProps {
     rootStore?: RootStore;
@@ -9,9 +11,19 @@ interface IProps {
 @inject("rootStore")
 @observer
 export class Events extends React.Component<IProps> {
-    public render() {
-        return <div style={{ minHeight: 200, background: "#1f2d3c" }} />;
+    public componentWillUpdate(nextProps: IProps) {
+        console.log(nextProps.rootStore!.snatchGeneratorStore.eventsView);
     }
 
-    // private snatchGeneratorStore = this.props.rootStore!.snatchGeneratorStore;
+    public render() {
+        return (
+            <div className={cn("events")}>
+                {this.snatchGeneratorStore.eventsView.map(x => (
+                    <Event data={x} />
+                ))}
+            </div>
+        );
+    }
+
+    private snatchGeneratorStore = this.props.rootStore!.snatchGeneratorStore;
 }
